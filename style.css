@@ -1,0 +1,605 @@
+#icons{float:left;
+    width: 64px; 
+    height: 64px;
+    margin:5px;
+   }
+   
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	font-size:100%;
+	vertical-align:baseline;
+	background:transparent
+}
+body {
+	line-height:1
+}
+ol, ul {
+	list-style:none
+}
+blockquote, q {
+	quotes:none
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content:'';
+	content:none
+}
+:focus {
+	outline:0
+}
+ins {
+	text-decoration:none
+}
+del {
+	text-decoration:line-through
+}
+
+
+/******************************/
+/* catalysis-test definitions */
+/******************************/
+#clcd {
+ background-color:#EEEEEE;
+ width:100%;
+}
+
+/*used for calculated "input" box widths*/
+.clcd-input {
+	width:75px;
+}
+
+#clcname {
+ background-color:#CCCCCC;
+ line-height:2;
+ width:100%;
+ font-size:18px;
+ padding-left:8px;
+}
+
+#test-indent {
+  width:100%;
+  text-align:left;
+  margin-left:20px;
+  margin-top:8px;
+  margin-bottom:8px;
+}
+
+.clcd-green {
+ background-color:#C1FFC1;
+}
+
+.clcd-red {
+ background-color:#FFBBBB;
+}
+
+.clcd-missing {
+ background-color:#FFFFA5;
+ line-height:1;
+ width:75px;
+}
+
+/*hide spinner on number input*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+#sidebar {
+	width: 250px;  /*was 258*/
+	background: #F3F3F3 url(style/images/noize.png) repeat 100% 0; /* was 232323*/ /* was 596d7f*/
+	-webkit-box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.15);
+	-moz-box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.15);
+	box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.15);
+	border-left: 1px solid rgba(0, 0, 0, 0.50);
+	border-right: 1px solid rgba(0, 0, 0, 0.50);
+	float: left;
+	/*position: fixed;*/ 
+	margin-top: -1px;
+	z-index: 100;
+}
+
+#wrapper {
+	width: 1024px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+#content {
+	width: 750px; /*770px */
+	float: right;
+	padding: 40px 0 20px 0;
+	/*line-height:50%;*/
+}
+
+#content div {
+	float: left;
+}
+
+#content-left {
+	width:46%;
+}
+
+#content-right {
+	margin-left:10px;
+	width:46%;
+}
+
+#content-wide {
+	width:100%;
+}
+
+p {
+	line-height: 15px;
+	margin-bottom: 8px;
+}
+
+table {
+	border-collapse:collapse;
+	border-spacing:0
+	
+}
+
+table.cat-form tr { 
+	height: 20px;
+}
+
+table.cat-form td { 
+	height: 20px; 
+}
+
+table.cat-form-narrow  { 
+	height:100%;
+}
+
+table.cat-form-narrow tr { 
+	height:100%;
+
+}
+
+table.cat-form-narrow td { 
+	height: 24px;
+	padding: 0.5px;
+}
+
+
+/*hide spinner on number inputs */
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+button::-moz-focus-inner, 
+
+input[type="button"]::-moz-focus-inner, 
+input[type="submit"]::-moz-focus-inner, 
+input[type="reset"]::-moz-focus-inner {
+  padding: 0 !important;
+  border: 0 none !important;
+}
+
+
+input[type=file] {
+    width: 400px;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+    min-width: 80px;
+    max-width: 130px;
+}
+
+input.nar {
+  	margin: 0px;
+    -moz-appearance:textfield;
+    min-width: 50px;
+    max-width: 110px;
+    max-height: 20px;
+    /*
+    border: 2px; */
+    padding: 0px;
+
+}
+
+input.narrow {
+  	margin: 0px;
+    -moz-appearance:textfield;
+    min-width: 50px;
+    max-width: 110px;
+    max-height: 20px;
+    /*
+    border: 2px; */
+    padding: 0px;
+
+}
+
+.MainReact {
+	background-color: #C1FFC1;
+	max-width: 114px;
+	max-height: 75px;
+}
+
+hr {
+	margin-top: 6px;
+	margin-bottom: 6px;
+	align: center;
+
+}
+
+
+hr.clcd-output {
+	width: 95%;
+	float: right;
+	min-width: 573px;
+}
+
+hr.popup {
+	width: 95%;
+	float: right;
+}
+
+button.hide {
+	background-color: transparent;
+	color: #FF5555;
+	font-weight: bold;
+	text-align: center;
+	border-radius: 6px;
+	height: 10px;
+	width: 10px;
+	padding: 0px;
+	border: none;
+	vertical-align: text-bottom;
+}
+
+.hide span{
+	position: relative;
+	top: -2px;
+}
+
+textarea {
+	font-size:12px;
+}
+
+.valtests input {
+	width:75px;
+}
+
+button.bighide {
+	background-color: transparent;
+	color: #FF5555;
+	font-weight: bold;
+	text-align: center;
+	border-radius: 12px;
+	height: 10px;
+	width: 10px;
+	padding: 0px;
+	border: none;
+}
+
+.bighide span {
+	position: relative;
+	top: -2px;
+}
+
+.orangeButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #f9eca0;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f9eca0;
+	box-shadow:inset 0px 1px 0px 0px #f9eca0;
+	/*background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f0c911), color-stop(1, #f2ab1e));
+	background:-moz-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
+	background:-webkit-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
+	background:-o-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
+	background:-ms-linear-gradient(top, #f0c911 5%, #f2ab1e 100%);
+	background:linear-gradient(to bottom, #f0c911 5%, #f2ab1e 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0c911', endColorstr='#f2ab1e',GradientType=0);*/
+	background-color:#f6a828;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #e78f08;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:3px 16px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ded17c;
+}
+
+.orangeButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f2ab1e), color-stop(1, #f0c911));
+	background:-moz-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
+	background:-webkit-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
+	background:-o-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
+	background:-ms-linear-gradient(top, #f2ab1e 5%, #f0c911 100%);
+	background:linear-gradient(to bottom, #f2ab1e 5%, #f0c911 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2ab1e', endColorstr='#f0c911',GradientType=0);*/
+	background-color:#f2ab1e;
+}
+
+.orangeButton:active {
+	position:relative;
+	top:1px;
+}
+
+.plainButton {
+	padding:0px 16px;
+	height:19px;
+}
+
+.plainButton span{
+	position: relative;
+	top: -2px;
+}
+
+sup, sub { 
+	vertical-align: 0;
+ 	position: relative; 
+}
+
+sup { bottom: 1ex; }
+sub { top: 0.8ex; }
+
+.clear {
+	clear:both;
+	display:block;
+	overflow:hidden;
+	visibility:hidden;
+	width:0;
+	height:0
+}
+.clearfix:after {
+	clear:both;
+	content:' ';
+	display:block;
+	font-size:0;
+	line-height:0;
+	visibility:hidden;
+	width:0;
+	height:0
+}
+.clearfix {
+	display:inline-block
+}
+
+* html .clearfix {
+	height:1%
+}
+
+.clearfix {
+	display:block
+}
+
+.math-eqn {
+  padding-bottom:  1rem;
+  padding-top:     1rem;
+  text-align:      center;
+  font-size:       1.5em;
+}
+
+.plot-container {
+	box-sizing: border-box;
+	width: 700px;
+	height: 400px;
+	padding: 20px 15px 15px 15px;
+	margin: 15px auto 30px auto;
+	border: 1px solid #ddd;
+	background: #fff;
+	background: linear-gradient(#f6f6f6 0, #fff 50px);
+	background: -o-linear-gradient(#f6f6f6 0, #fff 50px);
+	background: -ms-linear-gradient(#f6f6f6 0, #fff 50px);
+	background: -moz-linear-gradient(#f6f6f6 0, #fff 50px);
+	background: -webkit-linear-gradient(#f6f6f6 0, #fff 50px);
+	box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+	-o-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+	-ms-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+	-moz-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+	-webkit-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.plot-internalgradplot {
+	width: 100%;
+	height: 100%;
+	font-size: 14px;
+	line-height: 1.2em;
+	padding-top: 0px;
+  	padding-right: 0px;
+  	padding-bottom: 0px;
+  	padding-left: 0px;
+}
+
+.legend {
+	padding-top: 0px;
+  	padding-right: 0px;
+  	padding-bottom: 0px;
+  	padding-left: 0px;
+}
+
+/*************************************/
+/* END of catalysis-test definitions */
+/*************************************/
+
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	GENERAL
+/*-----------------------------------------------------------------------------------*/
+
+html, body {
+	height: 100%;
+}
+
+body {
+	background-color: #FDFDFB;
+	font-family:Arial, sans-serif;
+	font-size: 13px;
+	color: #585858;
+}
+
+a {
+	color: #688dad;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #ab4d63;
+}
+
+a.more {
+	font-family:Arial, sans-serif; /*Was 'Droid Serif', serif; */
+	/*font-style: italic;*/
+	font-size: 13px;
+	
+}
+
+h1 {
+	font-size: 18px;
+	line-height: 26px;
+	font-family:Arial, sans-serif; /* was 'Amaranth', sans-serif; */
+	/*color: #4a4a4a;*/
+	font-weight: normal;
+	margin: 0 0 5px 0;
+}
+
+
+h1.title {
+	padding: 0;
+	font-size: 30px; 
+	margin-bottom: 20px;
+	font-family:Times, serif;
+	
+}
+
+img {
+	display: block;
+}
+
+img.left {
+	float: left;
+	margin: 0 20px 20px 0;
+}
+img.right {
+	float: right;
+	margin: 0 0 20px 20px;
+}
+
+
+
+#logo {
+	text-align: none;
+	padding: 20px 0px 10px 10px;
+}
+
+#logo a {
+	border: none;
+}
+
+#logo img {
+	display: inline;
+}
+
+
+#logo img {
+	display: inline;
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	MENU
+/*-----------------------------------------------------------------------------------*/
+
+#menu {
+	float: left;
+	text-align: left;
+	font-family:Arial, sans-serif; /*Was 'Amaranth', sans-serif;*/ 
+	font-size: 17px;
+	margin-top: 40px;
+	margin-bottom: 50px;
+	position: relative;
+	z-index: 100;
+	padding: 0 0 0 24px;
+	text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.menu-v ul{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	width: 200px;
+	height: 100%
+	background: transparent url(style/images/menu-line.png) no-repeat center bottom;
+}
+ 
+.menu-v ul li{
+	position: relative;
+	padding-right: 5px;
+	background: transparent url(style/images/menu-line.png) no-repeat center top;
+	padding: 0;
+}
+
+.menu-v ul li a{
+	display: block;
+	color: white;
+	text-decoration: none;
+	padding: 12px 0 10px 20px;
+	padding-right: 17px;
+	background: transparent; 
+	color: #585858;
+	text-decoration: none;
+	border: none;
+}
+
+.menu-v ul li a.active, .menu-v ul li a.selected, .menu-v ul li a:hover{
+	text-decoration: none;
+	background: transparent url(style/images/menu-hover.png) repeat-y left top;
+	color: #585858;
+}
+
+.menu-v ul li ul{
+	position: absolute;
+	width: 130px; 
+	top: 0px;
+	font-weight: normal;
+	visibility: hidden;
+	text-align: left;
+	padding: 0 15px 0 15px;
+	margin-left: 0;
+	background: #232323 url(style/images/noize.png) repeat top center; /*was 596d7f*/
+	-webkit-box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.10);
+	-moz-box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.10);
+	box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.10);
+	border: 1px solid rgba(0, 0, 0, 0.30);
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.menu-v ul li ul li{
+	background: transparent url(style/images/dropdown-line.png) repeat-x left top;
+}
+
+.menu-v ul li ul li:first-child {
+	background: none;
+	padding-bottom: 0;
+}
+
+.menu-v ul li ul li a{
+	padding: 12px 0;
+}
+
+.menu-v ul li ul li a.active, .menu-v ul li ul li a.selected, .menu-v ul li ul li a:hover{
+	background: none;
+}
+
+
+.menu-v ul li ul {
+	
+}
+
+* html .menu-v ul li { float: left; height: 1%; }
+* html .menu-v ul li a { height: 1%; }
+

@@ -1,0 +1,1247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+
+Copyright © 2016 Purdue University All rights reserved. 
+
+Developed by: Purdue Catalysis Center, School of Chemical Engineering, Purdue University 
+https://engineering.purdue.edu/~catalyst/ 
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal with the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: 
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimers.
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimers in the documentation and/or other materials provided with the distribution.
+Neither the names of ??, nor the names of its contributors may be used to endorse or promote products derived from this Software without specific prior written permission.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE CONTRIBUTORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS WITH THE SOFTWARE.
+
+-->
+
+<head>
+	<meta charset="UTF-8">
+	<title>Gradient&#x2713;</title>
+	<link rel="shortcut icon" type="image/x-icon" href="style/images/PCC-favIcon.ico" />
+	<link rel="stylesheet" href="style/css/jquery-ui.min.css">
+	<link rel="stylesheet" href="style/css/jquery-ui.theme.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css" media="all" />
+	<link href='https://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<script async type="text/javascript" src="js/ddsmoothmenu.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/2.7.0/math.min.js"></script> 
+	<script type="text/javascript" src="gradientcheck.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+	<script type="text/javascript" src="js/jquery.flot.axislabels.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot.tooltip/0.8.5/jquery.flot.tooltip.min.js"></script>
+
+	<!-- Google Analytics Script-->
+	<script> 
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-74027701-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+	
+	
+<script type="text/javascript">
+    window.onbeforeunload = function() {
+        return "Make sure you have your work saved!";
+    }
+</script>
+
+
+	
+</head>
+
+<body>
+<!-- Begin Wrapper -->
+<div id="wrapper">
+	<!-- Begin Sidebar -->
+	<div id="sidebar">
+		<!--		 <div id="logo"><a href="index.html"><img width="225"  src="style/images/logo2.png" alt="Purdue Catalysis Center" /></a></div>-->
+		<div id="logo">
+			<center>
+			<br>
+			<a href="https://engineering.purdue.edu/~catalyst/"  target="_blank"><img src="style/images/purduelogo.png"  width="150"></a>
+			<br><br><br><br>
+			<a href="https://www.dow.com/"  target="_blank"><img src="style/images/dowlogo.jpg" width="150"></a>
+			</center>
+		</div>
+	<!-- Begin Menu -->
+    <div id="menu" class="menu-v">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+		<li><a href="../gradientcheck/index.html">GradientCheck</a></li>
+				<li><a href="../gradientcheck/history.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;History</a></li>
+				<li><a href="../gradientcheck/how.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How to Use</a></li>
+				<li><a href="../gradientcheck/license.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;License</a></li>
+		<li><a href="../newsoutreach.html">News and Outreach</a></li>
+        <li><a href="../members.html">Members</a></li>	
+		<li><a href="../prospective.html">Prospective Students</a></li>
+        <li><a href="../seminars.html">Seminars</a></li>
+        <li><a href="../publications.html">Publications</a></li>	
+		<li><a href="../contacts.html">Contact Us</a></li>
+        <li><a href="../links.html">Links</a></li>
+      </ul>
+    </div>
+    <!-- End Menu -->       
+</div>
+<!-- End Sidebar -->
+
+
+<!----------------------- Begin Content --------------------------->
+<div id="content">
+	<h1 class="title">Gradient&#x2713; (GradientCheck) for Heterogeneous Catalysis: </h1>
+
+	<p>By using this tool you agree to the terms of the <a href="license.html">license</a>.</p>
+	<div id="clcname">Inputs Section </div>
+	<label> Open JSON Input File <input type="file" id="form_data_json"></label><button type="button" id="populate_inputs" class="orangeButton" style="margin-right: 25px; float: right;">Fill Form from File</button>
+	<p></p>
+	<!----------- Inputs Section ------------>
+	<form class="insec">
+		<table class="cat-form">
+			<tr>
+				<td>Reaction Phase:</td>
+				<td><select id="dr_reaction_phase"><option selected name="Gas Phase">Gas Phase</option><option name="Liquid Phase">Liquid Phase</option></select> / default: Gas Phase</td>
+			</tr>
+			<tr>
+				<td>Temperature (T<sub>b</sub> &amp; T<sub>w</sub>):</td>
+				<td><input id="temp" type="number" min="0" step="any"> / K</td>
+			</tr>
+			<tr>
+				<td>Pressure (P):</td>
+				<td><input id="pressure" type="number" min="0" step="any"> / bar</td>
+			</tr>
+			<tr class="hrcontainer">
+				<td colspan="2"><hr></td>
+			</tr>
+			<tr>
+				<td>Reactor Radius (R<sub>r</sub>):</td>
+				<td><input id="R_rctr" type="number" min="0" step="any"> / m -- [Accepts scientific notation e.g. 1e-3]</td>
+			</tr>
+			<tr>
+				<td>Bed Length (L<sub>b</sub>):</td>
+				<td><input id="L_bed" type="number" min="0" step="any"> / m </td>
+			</tr>
+			<tr>
+				<td>Catalyst Particle Shape:</td>
+				<td>
+					<select id="dr_cat_shape">
+					<option selected name="Spheres">Spheres</option>  
+					<option name="Cylinders">Cylinders</option>
+					<option name="Rings">Rings</option>
+					</select>
+				</td> <!-- upon selection of cylinder/rings add L_p and R_p_inner input areas -->
+			</tr>
+			<tr>
+				<td>Particle Radius (R<sub>p</sub>):</td>
+				<td><input id="R_p" type="number" min="0" step="any"> / m </td>
+			</tr>
+			<tbody id="tbody_cat_shape_L" style="display: none;">
+				<tr>
+					<td>Particle Length (L<sub>p</sub>):</td>
+					<td><input id="L_p" type="number" min="0" step="any"> / m </td>
+				</tr>
+			</tbody>
+			<tbody id="tbody_cat_shape_Rin" style="display: none;">
+				<tr>
+					<td>Inner Radius (R<sub>p,inner</sub>):</td>
+					<td><input id="R_p_inner" type="number" min="0" step="any"> / m (must be &lt; R<sub>p</sub>)</td>
+				</tr>
+			</tbody>
+			<tr class="hrcontainer">
+				<td colspan="2"><hr></td>
+			</tr>
+			<tr>
+				<td>Observed Reaction Rate (r<sub>obs</sub>):</td>
+				<td><input id="rxn_rate" type="number" step="any"> / moles of A × kg-cat<sup>-1</sup> × s<sup>-1</sup></td>
+			</tr>
+			<tr>
+				<td>Enthalpy of Reaction (&Delta;H<sub>rxn</sub>)</td>
+				<td><input id="rxn_enthalpy" type="number" step="any"> / J × mole<sup>-1</sup></td>
+			</tr>
+			<tr>
+				<td>Reaction Order (n)</td>
+				<td>					
+					<select id="dr_rxn_order">
+					<option name="0">0</option>  
+					<option selected name="1">1</option>
+					<option name="2">2</option>
+					</select>
+			 	</td>
+			</tr>
+			<tr>
+				<td>Activation Energy (E<sub>app</sub>)</td>
+				<td><input id="rxn_activation_energy" type="number" step="any" min="0"> / J × mole<sup>-1</sup></td>
+			</tr>
+			<tr>
+				<td>Conversion (X<sub>A</sub>)</td>
+				<td><input id="rxn_conversion1" type="number" step="any" min="0"> / unitless (0 to 1)</td>
+			</tr>
+			<tr class="hrcontainer">
+				<td colspan="2"><hr></td>
+			</tr>
+			<tr>
+				<td>Catalyst Bulk Density (&rho;<sub>bulk</sub>):</td>
+				<td><input id="cat_rho_bulk" type="number" step="any"> / kg × m<sup>-3</sup> [usually 500-1500]</td>
+			</tr>
+			<tr>
+				<td>Catalyst Void Fraction (&epsilon;):</td>
+				<td><input id="cat_void_frac" type="number" min="0" max="1" step="any" value=0.4> / (0 to 1) [often 0.35-0.45 (default 0.4)]</td>
+			</tr>
+			<tr>
+				<td>Catalyst Thermal Conductivity (k<sub>p</sub>):</td>
+				<td><input id="cat_thermal_cond" type="number" step="any"> / W × m<sup>-1</sup> × K<sup>-1</sup> [often 0.13-0.25]</td>
+			</tr>
+			<tr>
+				<td>Catalyst Surface Area (S<sub>int</sub>):</td>
+				<td><input id="cat_surf_area" type="number" step="any"> / m<sup>2</sup> × g<sup>-1</sup></td>
+			</tr>
+			<tr>
+				<td>Catalyst Pore Volume (V<sub>pore</sub>):</td>
+				<td><input id="cat_pore_volume" type="number" step="any"> / m<sup>3</sup> × g<sup>-1</sup></td>
+			</tr>
+			<tr>
+				<td>Catalyst Pore Tortuosity (&tau;):</td>
+				<td><input id="cat_pore_tortuosity" type="number" step="any" value=4> / unitless [often 3-7 for porous catalysts]</td>
+			</tr>
+			<tr class="hrcontainer">
+				<td colspan="2"><hr></td>
+			</tr>
+			<tbody style="display: none;">
+				<tr>
+					<td>Initialize:</td> 
+					<td><input class="initialize" type="any" readonly step="any"></td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- Select Number of Reactants / Products -->
+		<table class="cat-form-narrow">
+			<tr>
+				<td>Number of Reactants: </td>
+				<td><select id="dr_num_reactants"><option selected name="One">One</option><option name="Two">Two</option></select></td>
+				<td style="width: 200px;"></td>
+				<td>Number of Products: </td>
+				<td><select id="dr_num_products"><option selected name="One">One</option><option name="Two">Two</option></select></td>
+			</tr>
+		</table>
+
+
+		<table class="cat-form"> <!--- Reactants and Products Section    ---->
+			<tr id="tr_reactants_products_diluent_header" style='font-size:16px;text-decoration:underline;' align="center">
+				<td></td>
+				<td class="MainReact">Main<br>Reactant A</td>
+				<td>Product B</td>
+				<td>Diluent C</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Inlet Mole Fractions:</td>
+				<td class="MainReact"><input id="molfrac1" type="number" step="any" class="nar"></td>
+				<td id="hide_molfrac2" style="display: none;"><input id="molfrac2" type="number" step="any" class="nar"></td>
+				<td><input id="molfrac3" type="number" step="any" class="nar"></td>
+				<td id="hide_molfrac4" style="display: none;"><input id="molfrac4" type="number" step="any" class="nar"></td>
+				<td><input id="molfrac5" type="number" step="any" class="nar"></td>			
+				<td>/ must add to 1</td>
+			</tr>
+			<tr>
+				<td>Fluid Viscosity (&mu;<sub>f</sub>):</td>
+				<td class="MainReact"><input id="fluidvisc1" type="number" step="any" class="nar"></td>
+				<td id="hide_fluidvisc2" style="display: none;"><input id="fluidvisc2" type="number" step="any" class="nar"></td>
+				<td><input id="fluidvisc3" type="number" step="any" class="nar"></td>
+				<td id="hide_fluidvisc4" style="display: none;"><input id="fluidvisc4" type="number" step="any" class="nar"></td>
+				<td><input id="fluidvisc5" type="number" step="any" class="nar"></td>
+				<td>/ kg × m<sup>-1</sup> × s<sup>-1</sup></td>
+			</tr>
+			<tr>
+				<td>Heat Capacity (C<sub>p</sub>):</td>
+				<td class="MainReact"><input id="heatcapacity1" type="number" step="any" class="nar"></td>
+				<td id="hide_heatcapacity2" style="display: none;"><input id="heatcapacity2" type="number" step="any" class="nar"></td>
+				<td><input id="heatcapacity3" type="number" step="any" class="nar"></td>
+				<td id="hide_heatcapacity4" style="display: none;"><input id="heatcapacity4" type="number" step="any" class="nar"></td>
+				<td><input id="heatcapacity5" type="number" step="any" class="nar"></td>
+				<td> / J × kg<sup>-1</sup> × K<sup>-1</sup></td>
+			</tr>
+			<tr>
+				<td>Thermal Conductivity (k<sub>f</sub>):</td>
+				<td class="MainReact"><input id="thermalcond1" type="number" step="any" class="nar"></td>
+				<td id="hide_thermalcond2" style="display: none;"><input id="thermalcond2" type="number" step="any" class="nar"></td>
+				<td><input id="thermalcond3" type="number" step="any" class="nar"></td>
+				<td id="hide_thermalcond4" style="display: none;"><input id="thermalcond4" type="number" step="any" class="nar"></td>
+				<td><input id="thermalcond5" type="number" step="any" class="nar"></td>
+				<td> / W × m<sup>-1</sup> × K<sup>-1</sup></td>
+			</tr>
+			<tbody id="tbody_gas_dvol"><!-- for hiding in the case of liquids -- visible by default -->
+				<tr>
+					<td>Diffusion Volume (&Sigma;<sub>&nu;,i</sub>):</td>
+					<td class="MainReact"><input id="difvol1" type="number" step="any" class="nar"></td>
+					<td id="hide_difvol2" style="display: none;"><input id="difvol2" type="number" step="any" class="nar"></td>
+					<td><input id="difvol3" type="number" step="any" class="nar"></td>
+					<td id="hide_difvol4" style="display: none;"><input id="difvol4" type="number" step="any" class="nar"></td>
+					<td><input id="difvol5" type="number" step="any" class="nar"></td>			
+					<td><button type="button" id="button_fuller_dvol" class="plainButton"><span>Estimate &Sigma;<sub>&nu;,i</sub></span></button></td>
+				</tr>
+			</tbody>
+			<tbody id="tbody_liquid_vb" style="display: none;"> <!-- for hiding in the case of gases(default)-->
+				<tr>
+					<td>Liquid Density (&rho;<sub>f</sub>):</td>
+					<td class="MainReact"><input id="liq_density1" type="number" step="any" class="nar"></td>
+					<td id="hide_liq_density2" style="display: none;"><input id="liq_density2" type="number" step="any" class="nar"></td>
+					<td><input id="liq_density3" type="number" step="any" class="nar"></td>
+					<td id="hide_liq_density4" style="display: none;"><input id="liq_density4" type="number" step="any" class="nar"></td>
+					<td><input id="liq_density5" type="number" step="any" class="nar"></td>			
+					<td>/ kg × m<sup>-3</sup></td>
+				</tr>
+				<tr>
+					<td>Molar Volume (V<sub>b,i</sub>):</td>
+					<td class="MainReact"><input id="molar_boil_vol1" type="number" step="any" class="nar"></td>
+					<td id="hide_molar_boil_vol2" style="display: none;"><input id="molar_boil_vol2" type="number" step="any" class="nar"></td>
+					<td><input id="molar_boil_vol3" type="number" step="any" class="nar"></td>
+					<td id="hide_molar_boil_vol4" style="display: none;"><input id="molar_boil_vol4" type="number" step="any" class="nar"></td>
+					<td><input id="molar_boil_vol5" type="number" step="any" class="nar"></td>			
+					<td><button type="button" id="button_lebas_vb" class="plainButton"><span>Estimate V<sub>b,i</sub></span></button></td>
+				</tr>
+				<tr>
+					<td>Association Factor (&phi;<sub>Ai</sub>):</td>
+					<td class="MainReact"></td> <!-- no parameter for A -->
+					<td id="hide_wilke_assoc_phi2" style="display: none;"><input id="wilke_assoc_phi2" type="number" step="any" class="nar"></td>
+					<td><input id="wilke_assoc_phi3" type="number" step="any" class="nar"></td>
+					<td id="hide_wilke_assoc_phi4" style="display: none;"><input id="wilke_assoc_phi4" type="number" step="any" class="nar"></td>
+					<td><input id="wilke_assoc_phi5" type="number" step="any" class="nar"></td>			
+					<td><button type="button" id="button_phi_suggestions" class="plainButton"><span>&phi;<sub>Ai</sub> Help</span></button></td>
+				</tr>
+			</tbody>
+			<tr>
+				<td>Molecular Weight (MW):</td>
+				<td class="MainReact"><input id="molweight1" type="number" step="any" class="nar"></td>
+				<td id="hide_molweight2" style="display: none;"><input id="molweight2" type="number" step="any" class="nar"></td>
+				<td><input id="molweight3" type="number" step="any" class="nar"></td>
+				<td id="hide_molweight4" style="display: none;"><input id="molweight4" type="number" step="any" class="nar"></td>
+				<td><input id="molweight5" type="number" step="any" class="nar"></td>
+				<td>/ g × mol<sup>-1</sup></td>
+			</tr>
+			
+		</table>
+
+
+		<p>Notes:</p>
+		<textarea rows="3" cols="100" id="notes_section" style="resize: vertical;"></textarea>
+	
+	</form>
+
+
+	<table class="cat-form">
+		
+		<tr class="hrcontainer"> 
+			<td style="font-style: italic;"><button id="hide_advanced_input" class="hide"><span>+</span></button>&nbsp;&nbsp;Advanced Option&nbsp;</td>
+			<td colspan="3" valign="middle"><hr class="clcd-output"></td>
+		</tr>
+	</table>
+
+	<form class="insec2">
+		<table class="cat-form">		
+			<tbody id="tbody_advanced_input" style="display: none;">
+				<tr> 
+					<td></td>
+					<td>Override Estimate of Effective Diffusivity (D<sub>eff</sub>):</td>
+					<td><input type="checkbox" id="ck_override_diffusivity" value="true"></td>
+					<td><input type="number" id="diff_effective_override" step="any"> / m<sup>2</sup> × s<sup>-1</sup></td>
+				</tr>
+				<tr><td colspan=4><hr class="clcd-output"></td></tr>
+			</tbody>
+		</table>
+	</form>
+		
+	
+
+	<p>Output Filename:<input id="JSON_filename" value="catalysis" style="width: 300px;">.json <a type="button" id="save_inputs_section_as_JSON" style="margin-left: 150px;" class="orangeButton">Download Form</a></p>
+
+	<!------------- End Inputs Section ------------->
+	
+	<!-------------------------------------------------------------------------------------->
+	<!-------------------------------------------------------------------------------------->
+	<!------------------------------- Begin Outputs Section -------------------------------->
+	<!-------------------------------------------------------------------------------------->
+	<!-------------------------------------------------------------------------------------->
+	<div id="clcname"><button id="hide_calculated" class="bighide"><span>+</span></button>Calculated Properties<button type="button" id="calculate_all_fields" class="orangeButton" style="margin-right: 25px; float: right; margin-top: 5px;">Calculate all fields</button></div>
+	<span id="calculated">
+	<table class="cat-form"> <!--- Reactants and Products Section ---->
+		<tbody id="tbody_ideal_gas_dens">	
+			<tr id="tr_reactants_products_diluent_header_igdens" style='font-size:16px;text-decoration:underline;' align="center">
+				<td> </td>
+				<td>Reactant A</td>
+				<td>Product B</td>
+				<td>Diluent C</td>
+				<td> </td>
+			</tr>
+			<tr>
+				<td>Ideal Gas Density:</td>
+				<td><input id="res_gasdens1" type="number" readonly class="nar"></td>
+				<td id="hide_res_gasdens2" style="display: none;"><input id="res_gasdens2" type="number" step="any" class="nar" readonly></td>
+				<td><input id="res_gasdens3" type="number" readonly class="nar"></td>
+				<td id="hide_res_gasdens4" style="display: none;"><input id="res_gasdens4" type="number" step="any" class="nar" readonly></td>
+				<td><input id="res_gasdens5" type="number" readonly class="nar"></td>
+				<td>/ kg × m<sup>-3</sup></td>
+			</tr>
+		</tbody>
+		<tr>
+			<td>Inlet Concentration of A:</td>
+			<td><input id="res_bulkconc1" type="number" readonly class="nar"></td>
+			<td> / mol × m<sup>-3</sup></td>
+			<td></td>
+		</tr>
+		<tbody id="tbody_limitingreactant" style="display: none;">
+			<tr>
+				<td>Is "A" The Limiting Reactant?</td>
+				<td><input id="limiting_reactant_check" type="any" readonly class="nar"></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+
+	
+	<table class="cat-form">
+		<!----- Based on Mixing Rules ------>		
+		<tr>
+			<td colspan="2" valign="middle"><button id="hide_mixing" class="hide"><span>+</span></button><hr class="clcd-output"></td> 
+		</tr>
+		<tbody id="mixing">
+		<tr>
+			<td>Mixture Diffusivity (D<sub>Am</sub>):</td>
+			<td><input id="diff_mixture" type="any" readonly step="any"> / m<sup>2</sup> × s<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>Average Molecular Weight (MW):</td>
+			<td><input id="avg_mw" type="any" readonly step="any"> / g × mol<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>Average Heat Capacity (C<sub>p</sub>):</td>
+			<td><input id="avg_cp" type="any" readonly step="any"> / J × kg<sup>-1</sup> × K<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>Average Thermal Conductivity (k<sub>f</sub>):</td>
+			<td><input id="avg_k_conduct" type="any" readonly step="any"> / W × m<sup>-1</sup> × K<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>Average Viscosity (&mu;<sub>f</sub>):</td>
+			<td><input id="avg_viscosity" type="any" readonly step="any"> / kg × m<sup>-1</sup> × s<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>Average Density (&rho;<sub>f</sub>):</td>
+			<td><input id="avg_density" type="any" readonly step="any"> / kg × m<sup>-3</sup></td>
+		</tr>
+		</tbody>	
+
+		<tr>
+			<td colspan="2" valign="middle"><button id="hide_catprops" class="hide"><span>+</span></button><hr class="clcd-output"></td> 
+		</tr>
+		<tbody id="catprops">
+		<tr>
+			<td>Total Mass Flow Rate (&#7745;):</td>
+			<td><input id="mass_flowrate" type="any" readonly step="any"> / kg × s<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>Superficial Mass Flux (G):</td>
+			<td><input id="superf_mass_flux" type="any" readonly step="any"> / kg × m<sup>-2</sup> × s<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>Space Time Across Bed (t<sub>bed</sub>):</td> 
+			<td><input id="bed_space_time" type="any" readonly step="any"> / s</td>
+		</tr>
+		<tr>
+			<td>Catalyst Mass Loaded (m<sub>cat</sub>):</td>
+			<td><input id="mass_catalyst" type="any" readonly step="any"> / kg</td>
+		</tr>
+		<tr>
+			<td>Catalyst Bed Volume (V<sub>bed</sub>):</td>
+			<td><input id="bed_volume" type="any" readonly step="any"> / m<sup>3</sup></td>
+		</tr>
+		<tr>
+			<td>Particle Porosity (&epsilon;<sub>p</sub>):</td>
+			<td><input id="cat_porosity" type="any" readonly step="any"> / (0 to 1) [usually 0.3-0.7]</td>
+		</tr>
+		<tr>
+			<td>Particle Density (&rho;<sub>p</sub>):</td>
+			<td><input id="cat_rho_particle" type="any" readonly step="any"> / kg × m<sup>-3</sup></td>
+		</tr>
+		<tr>
+			<td>Mean Pore Radius (r<sub>pore</sub>):</td>
+			<td><input id="cat_pore_radius" type="any" readonly step="any"> / &#8491;</td>
+		</tr>
+		<tr>
+			<td>Single Particle Volume (V<sub>p</sub>):</td>
+			<td><input id="cat_particle_vol" type="any" readonly step="any"> / m<sup>3</sup> × particle<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>External Surface Area (S<sub>ext</sub>):</td>
+			<td><input id="cat_ext_area" type="any" readonly step="any"> / m<sup>2</sup> × particle<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>External Surface Area Per Mass (a<sub>m</sub>):</td>
+			<td><input id="cat_interfacial_area" type="any" readonly step="any"> / m<sup>2</sup> × kg<sup>-1</sup></td>
+		</tr>
+		</tbody>
+		<!----- NDims related ------>
+		<tr>
+			<td colspan="2" valign="middle"><button id="hide_ndims" class="hide"><span>+</span></button><hr class="clcd-output"></td> 
+		</tr>
+		<tbody id="ndims">	
+		<tr>
+			<td>Reynolds Number:</td>
+			<td><input id="ndim_reynolds" type="any" readonly step="any"> / unitless</td>
+		</tr>
+		<tr>
+			<td>Prandtl Number:</td>
+			<td><input id="ndim_prandtl" type="any" readonly step="any"> / unitless</td>
+		</tr>
+		<tr>
+			<td>Schmidt Number:</td>
+			<td><input id="ndim_schmidt" type="any" readonly step="any"> / unitless</td>
+		</tr>
+		<tr>
+			<td>Chilton-Colburn Factor (j<sub>D</sub>):</td>
+			<td><input id="ndim_colburn" type="any" readonly step="any"> / unitless</td>
+		</tr>
+		<tr>
+			<td>Mass Transfer Coefficient (k<sub>m</sub>):</td>
+			<td><input id="ndim_massXfer_coeff" type="any" readonly step="any"> / m × s<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>Sherwood Number:</td>
+			<td><input id="ndim_sherwood" type="any" readonly step="any"> / unitless</td>
+		</tr>
+		<tr>
+			<td>Particle-Fluid Heat Transfer Coefficient (h):</td>
+			<td><input id="ndim_heatXfer_coeff" type="any" readonly step="any"> / W × m<sup>-2</sup> × K<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>Nusselt Number:</td>
+			<td><input id="ndim_nusselt" type="any" readonly step="any"> / unitless</td>
+		</tr>
+		<tr>
+			<td>Effective Diffusivity (D<sub>eff</sub>):</td>
+			<td><input id="diff_effective" type="any" readonly step="any"> / m<sup>2</sup> × s<sup>-1</sup></td>
+		</tr>
+		</tbody>
+		</table>
+
+		<!----- Effectiveness related ------>
+		<table class="cat-form">
+			<tr>
+				<td colspan="5" class="clcd-output"><button id="hide_intgrad" class="hide"><span>+</span></button><hr class="clcd-output"></td> 
+			</tr>
+			<tbody id="intgrad">
+				<tr style='font-size:16px;text-decoration:underline;' align="center">
+					<td></td>
+					<td>Bed Average</td>
+					<td>Bed Inlet</td>
+					<td>Bed Outlet</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Weisz-Prater Modulus (M<sub>WP</sub>):</td>
+					<td><input id="rxn_weisz_prater" type="any" class="narrow" readonly step="any"></td>
+					<td><input id="rxn_weisz_prater_inlet" type="any" class="narrow" readonly step="any"></td>
+					<td><input id="rxn_weisz_prater_outlet" type="any" class="narrow" readonly step="any"></td>
+					<td> / unitless</td>
+				</tr>
+				<tr>
+					<td>Thiele Modulus (M<sub>T</sub>):</td>
+					<td><input id="rxn_thiele" type="any" class="narrow" readonly step="any"></td>
+					<td><input id="rxn_thiele_inlet" type="any" class="narrow" readonly step="any"></td>
+					<td><input id="rxn_thiele_outlet" type="any" class="narrow" readonly step="any"></td>
+					<td> / unitless</td
+				</tr>
+				<tr>
+					<td>Effectiveness Factor (&eta;):</td>
+					<td><input id="rxn_eff_factor" type="any" class="narrow" readonly step="any"></td>
+					<td><input id="rxn_eff_factor_inlet" type="any" class="narrow" readonly step="any"></td>
+					<td><input id="rxn_eff_factor_outlet" type="any" class="narrow" readonly step="any"></td>
+					<td> / unitless</td
+				</tr>
+			</tbody>
+		</table>
+		<!----- Gradients related ------>
+	<table class="cat-form">
+		<tr>
+			<td colspan="2"><hr class="clcd-output"></td> 
+		</tr>
+		<tr>
+			<td>External Concentration Gradient:</td>
+			<td><input id="rxn_externalconc_grad" type="any" readonly step="any"> / %</td>
+		</tr>
+		<tr>
+			<td>External Temperature Gradient:</td>
+			<td><input id="rxn_externaltemp_grad" type="any" readonly step="any"> / K</td>
+		</tr>
+		<tr>
+			<td>Internal Temperature Gradient:</td>
+			<td><input id="rxn_internaltemp_grad" type="any" readonly step="any"> / K</td>
+		</tr>
+		<tr>
+			<td>Prater Number (&beta;):</td>
+			<td><input id="ndim_prater" type="any" readonly step="any"> / unitless</td>
+		</tr>
+		<tr>
+			<td>Intrinsic (1<sup>st</sup> Order) Rate Constant (k<sub>int</sub>):</td>
+			<td><input id="rxn_intrinsic_rconst" type="any" readonly step="any"> / m<sup>3</sup> × kg-cat<sup>-1</sup> × s<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>Max Possible Diffusion-Limited Rate (r<sub>max</sub>):</td> 
+			<td><input id="rxn_maxlimitingrate" type="any" readonly step="any"> / moles of A × kg-cat<sup>-1</sup> × s<sup>-1</sup></td>
+		</tr>
+
+		<!-- THIS IS USED FOR SEVERAL INTERNAL CALCULATIONS, but not displayed -->
+		<tbody style="display: none;">
+			<tr>
+				<td>External Surface Concentration:</td> 
+				<td><input id="rxn_surfconcentration" type="any" readonly step="any"> / mol × m<sup>-3</sup></td>
+			</tr>
+			<tr>
+				<td>External Surface Temperature:</td>
+				<td><input id="rxn_surftemperature" type="any" readonly step="any"> / K</td>
+			</tr>
+		</tbody>
+	</table>
+	</span>
+
+	<!--------------- begin bed scale gradients section --------------->
+
+	<div id="clcname"><button id="hide_bedscalegrads" class="bighide"><span>+</span></button>Bed Scale Gradients</div>
+	<span id="bedscalegrads">
+	<table class="cat-form">
+		<tr>
+			<td>Axial Dispersion Coefficient (D<sub>axial</sub>):</td> 
+			<td><input id="axial_disp_coeff" type="any" readonly step="any"> / m<sup>2</sup> × s<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>Radial Dispersion Coefficient (D<sub>rad</sub>):</td> 
+			<td><input id="radial_disp_coeff" type="any" readonly step="any"> / m<sup>2</sup> × s<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>Pressure Drop Across Bed (&Delta;P):</td> 
+			<td><input id="bed_pressure_drop" type="any" readonly step="any"> / bar</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr class="clcd-output"></td> 
+		</tr>
+		<tr>
+			<td>Effective Radial Thermal Conductivity (k<sub>re</sub>):</td> 
+			<td><input id="schlunder_thermal_cond" type="any" readonly step="any"> / W × m<sup>-1</sup> × K<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>Wall Heat Transfer Coeff (h<sub>w</sub>):</td> 
+			<td><input id="dixon_h_wall" type="any" readonly step="any"> / W × m<sup>-2</sup> × K<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>Internal Heat Transfer Coeff (h<sub>i</sub>):</td> 
+			<td><input id="dixon_h_overall" type="any" readonly step="any"> / W × m<sup>-2</sup> × K<sup>-1</sup></td>
+		</tr>
+		<tr>
+			<td>Axial Temperature Change (&Delta;T<sub>axial</sub>):</td> 
+			<td><input id="bed_axial_max_deltatemp" type="any" readonly step="any"> / K</td>
+		</tr>	
+	</table>
+	</span>
+
+	<!--------------- begin validation tests section --------------->
+
+	<div id="clcname"><button id="hide_valtests" class="bighide"><span>+</span></button>Validation Tests</div>
+	<span id="valtests">
+	<table class="valtests">
+		<tr>
+			<td>r<sub>obs</sub> &lt; r<sub>max</sub></td>
+			<td><input id="test_realrate" type="any" readonly step="any"></td>
+			<td>Is the observed reaction rate realistic?</td>
+		</tr>
+		<tr>
+			<td>&sum; y<sub>i</sub> = 1</td>
+			<td><input id="test_molfrac" type="any" readonly step="any"></td>
+			<td>Do the mole fractions add to one?</td>
+		</tr>
+		<tr>
+			<td>0.25 &lt; &epsilon; &lt; 0.55</td>
+			<td><input id="test_voidfrac" type="any" readonly step="any"></td>
+			<td>Is the void fraction within typical range?</td>
+		</tr>
+		<tr>
+			<td>0.1 &lt; k<sub>p</sub> &lt; 1</td>
+			<td><input id="test_kp" type="any" readonly step="any"></td>
+			<td>Is the particle conductivity within typical range?</td>
+		</tr>
+		<tr>
+			<td>&epsilon;<sub>p</sub> &lt; 0.7</td>
+			<td><input id="test_porosity" type="any" readonly step="any"></td>
+			<td>Is the porosity within typical range?</td>
+		</tr>
+		<tr>
+			<td>2 &lt; &tau; &lt; 6</td>
+			<td><input id="test_tortuosity" type="any" readonly step="any"></td>
+			<td>Is the tortuosity within typical range?</td>
+		</tr>
+		<tspan id="tbody_gas_prandtl_test">
+			<tr>
+				<td>0.5 &lt; Pr &lt; 1.5</td>
+				<td><input id="test_ndim_prandtl" type="any" readonly step="any"></td>
+				<td>Is the Prandtl number within typical range for a gas?</td>
+			</tr>
+		</tspan>
+		<tr>
+			<td>Re<sub>Liq</sub> &gt; 0.01 or Re<sub>Gas</sub> &gt; 1</td>
+			<td><input id="test_ndim_reynolds" type="any" readonly step="any"></td>
+			<td>Is the Reynolds number within the valid range for j-factor correlations?</td>
+		</tr>
+		<tr>
+			<td colspan="3"><hr class="clcd-output"></td> 
+		</tr>
+		<tr>
+			<td>&beta; &gt; 0.3</td>
+			<td><input id="test_ndim_prater" type="any" readonly step="any"></td>
+			<td>Are multiple steady states possible?</td>
+		</tr>
+		<tr>
+			<td>(C<sub>b</sub> - C<sub>s</sub>)/C<sub>b</sub> &gt; 5%</td>
+			<td><input id="test_externalconc_limit" type="any" readonly step="any"></td>
+			<td>Does external diffusion limit reaction rate?</td>
+		</tr>
+		<tr>
+			<td>(C<sub>b</sub> - C<sub>s</sub>)/C<sub>b</sub> &gt; 50%</td>
+			<td><input id="test_externalconc_control" type="any" readonly step="any"></td>
+			<td>Does external diffusion control reaction rate?</td>
+		</tr>
+		<tr>
+			<td>&#124;T<sub>b</sub> - T<sub>s</sub>&#124; &gt; 1 K</td>
+			<td><input id="test_externaltemp" type="any" readonly step="any"></td>
+			<td>Is the external temperature gradient significant?</td>
+		</tr>
+		<tr>
+			<td>&#124;T<sub>s</sub> - T<sub>c</sub>&#124; &gt; 1 K</td>
+			<td><input id="test_internaltemp" type="any" readonly step="any"></td>
+			<td>Is the internal temperature gradient significant?</td>
+		</tr>
+		<tr>
+			<td>&eta; &lt; 0.95</td>
+			<td><input id="test_internalconc_limit" type="any" readonly step="any"></td>
+			<td>Does pore diffusion limit reaction rate?</td>
+		</tr>
+		<tr>
+			<td>&eta; &lt; 0.5</td>
+			<td><input id="test_internalconc_strong" type="any" readonly step="any"></td>
+			<td>Does pore diffusion strongly affect reaction rate?</td>
+		</tr>
+		<!------ begin bed scale gradients validation tests ------>
+		<tr>
+			<td colspan="3"><hr class="clcd-output"></td> 
+		</tr>
+		<tr>
+		<tr>
+			<td>&Delta;P &gt; 0.2P</td>
+			<td><input id="test_pressure_drop" type="any" readonly step="any"></td>
+			<td>Is the bed pressure drop greater than 20% of the total pressure?</td>
+		</tr>
+			<td><button id="hide_mears_disp" class="hide"><span>+</span></button>Mears Axial Dispersion</td>
+			<td><input id="test_mears_dispersion" type="any" readonly step="any"></td>
+			<td>Does axial dispersion have a large effect upon rate?</td>
+		</tr>
+		<tbody style="display: none;" id="tbody_mears_disp">
+			<tr>
+				<td style="text-align:right">LHS <input id="test_mears_dispersion_LHS" type="any" readonly step="any"></td>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&le; </td>
+				<td>RHS <input id="test_mears_dispersion_RHS" type="any" readonly step="any">? </td>
+			</tr>
+		</tbody>
+		<tr>
+			<td><button id="hide_gierman_disp" class="hide"><span>+</span></button>Gierman Axial Dispersion</td>
+			<td><input id="test_gierman_dispersion" type="any" readonly step="any"></td>
+			<td>Does axial dispersion have a large effect upon rate?</td>
+		</tr>
+		<tbody style="display: none;" id="tbody_gierman_disp">
+			<tr>
+				<td style="text-align:right">LHS <input id="test_gierman_dispersion_LHS" type="any" readonly step="any"></td>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&le; </td>
+				<td>RHS <input id="test_gierman_dispersion_RHS" type="any" readonly step="any">? </td>
+			</tr>
+		</tbody>
+		<tr>
+			<td><button id="hide_sie_walleffect" class="hide"><span>+</span></button>Sie Wall Effects</td>
+			<td><input id="test_sie_walleffect" type="any" readonly step="any"></td>
+			<td>Do broad radial velocity profiles negatively effect the reactant RTD?</td>
+		</tr>
+		<tbody style="display: none;" id="tbody_sie_walleffect">
+			<tr>
+				<td style="text-align:right">LHS <input id="test_sie_walleffect_LHS" type="any" readonly step="any"></td>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&le; </td>
+				<td>RHS <input id="test_sie_walleffect_RHS" type="any" readonly step="any">? </td>
+			</tr>
+		</tbody>
+		<tr>
+			<td><button id="hide_mears_radialintp" class="hide"><span>+</span></button>Mears Radial Interparticle</td>
+			<td><input id="test_mears_radial_interparticle" type="any" readonly step="any"></td>
+			<td>Does a radial interparticle heat transport limitation indicate a nonisothermal reactor?</td>
+		</tr>
+		<tbody style="display: none;" id="tbody_mears_radialintp">
+			<tr>
+				<td style="text-align:right">LHS <input id="test_mears_radial_interparticle_LHS" type="any" readonly step="any"></td>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ge; </td>
+				<td>RHS <input id="test_mears_radial_interparticle_RHS" type="any" readonly step="any">? </td>
+			</tr>
+		</tbody>
+	</table>
+	</span>
+
+	<!--------------- begin section for plotting gradients --------------->
+	<div id="clcname">Gradient Plots <button type="button" id="plot_data" class="orangeButton" style="margin-right: 25px; float: right; margin-top: 5px;">Plot Gradients</button></div>
+		<div class="plot-container">
+			<div id="internalgradplot" class="plot-internalgradplot"></div>
+		</div>
+
+
+	<!----------- End Outputs Section ------------>
+<!----------------------- End Content --------------------------->
+<div id="dialog_fuller_dvol" title="Estimate Diffusion Volumes of Pure Components">
+	
+
+<table class="cat-form-narrow">
+	<tr id="tr_reactants_products_diluent_header_fuller" style='font-size:16px;text-decoration:underline;' align="center">
+		<td></td>
+		<td>Reactant A</td>
+		<td>Product B</td>
+		<td>Diluent C</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>
+			<table class="cat-form-narrow">
+				<tr><td>&nbsp;</td></tr>
+				<tr><td>Atom / Structure</td></tr>
+				<tr><td>C</td></tr>
+				<tr><td>H</td></tr>
+				<tr><td>O</td></tr>
+				<tr><td>N</td></tr>
+				<tr><td>S</td></tr>
+				<tr><td>F</td></tr>
+				<tr><td>Cl</td></tr>
+				<tr><td>Br</td></tr>
+				<tr><td>I</td></tr>
+				<tr><td>Aromatic Ring</td></tr>
+				<tr><td>Heterocyclic Ring</td></tr>
+				<tr><td><hr class="popup"></td></tr>
+				<tr><td>Mol. Formula:</td></tr>
+				<tr><td>Mol. Weight:</td></tr>
+				<tr><td>Mol. Diff. Vol.:</td></tr>
+			</table>
+		</td>
+		<td>
+			<table class="cat-form-narrow">
+				<tr><td align="center"><select id="dr_molname_dvol1"><option selected name="Custom">Custom</option><option name="N2">N&#8322</option><option name="O2">O&#8322</option><option name="Air">Air</option><option name="H2O">H&#8322O</option><option name="CO">CO</option><option name="CO2">CO&#8322</option><option name="H2">H&#8322</option><option name="He">He</option><option name="Ar">Ar</option><option name="N2O">N&#8322O</option><option name="NH3">NH&#8323</option><option name="Cl2">Cl&#8322</option><option name="Br2">Br&#8322</option><option name="SO2">SO&#8322</option></select></td></tr>
+				<tr><td align="center"># of Each</td></tr>
+				<tr><td><input id="fuller_C1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_H1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_O1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_N1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_S1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_F1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_Cl1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_Br1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_I1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_ar1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_het1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><hr class="popup"></td></tr>
+				<tr><td><input id="fuller_molformula1" type="any" readonly class="nar"></td></tr>
+				<tr><td><input id="fuller_molweight1" type="number" readonly step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_dvol1" type="number" readonly step="any" class="nar"></td></tr>
+			</table>
+		</td>
+
+		<td id="hide_column_dvol2" style="display: none;">
+			<table class="cat-form-narrow">
+				<tr><td align="center"><select id="dr_molname_dvol2"><option selected name="Custom">Custom</option><option name="N2">N&#8322</option><option name="O2">O&#8322</option><option name="Air">Air</option><option name="H2O">H&#8322O</option><option name="CO">CO</option><option name="CO2">CO&#8322</option><option name="H2">H&#8322</option><option name="He">He</option><option name="Ar">Ar</option><option name="N2O">N&#8322O</option><option name="NH3">NH&#8323</option><option name="Cl2">Cl&#8322</option><option name="Br2">Br&#8322</option><option name="SO2">SO&#8322</option></select></td></tr>
+				<tr><td align="center"># of Each</td></tr>
+				<tr><td><input id="fuller_C2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_H2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_O2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_N2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_S2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_F2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_Cl2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_Br2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_I2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_ar2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_het2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><hr class="popup"></td></tr>
+				<tr><td><input id="fuller_molformula2" type="any" readonly class="nar"></td></tr>
+				<tr><td><input id="fuller_molweight2" type="number" readonly step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_dvol2" type="number" readonly step="any" class="nar"></td></tr>
+			</table>
+		</td>
+
+		<td>
+			<table class="cat-form-narrow">
+				<tr><td align="center"><select id="dr_molname_dvol3"><option selected name="Custom">Custom</option><option name="N2">N&#8322</option><option name="O2">O&#8322</option><option name="Air">Air</option><option name="H2O">H&#8322O</option><option name="CO">CO</option><option name="CO2">CO&#8322</option><option name="H2">H&#8322</option><option name="He">He</option><option name="Ar">Ar</option><option name="N2O">N&#8322O</option><option name="NH3">NH&#8323</option><option name="Cl2">Cl&#8322</option><option name="Br2">Br&#8322</option><option name="SO2">SO&#8322</option></select></td></tr>
+				<tr><td align="center"># of Each</td></tr>
+				<tr><td><input id="fuller_C3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_H3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_O3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_N3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_S3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_F3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_Cl3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_Br3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_I3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_ar3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_het3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><hr class="popup"></td></tr>
+				<tr><td><input id="fuller_molformula3" type="any" readonly class="nar"></td></tr>
+				<tr><td><input id="fuller_molweight3" type="number" readonly step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_dvol3" type="number" readonly step="any" class="nar"></td></tr>
+			</table>
+		</td>
+
+		<td id="hide_column_dvol4" style="display: none;">
+			<table class="cat-form-narrow">
+				<tr><td align="center"><select id="dr_molname_dvol4"><option selected name="Custom">Custom</option><option name="N2">N&#8322</option><option name="O2">O&#8322</option><option name="Air">Air</option><option name="H2O">H&#8322O</option><option name="CO">CO</option><option name="CO2">CO&#8322</option><option name="H2">H&#8322</option><option name="He">He</option><option name="Ar">Ar</option><option name="N2O">N&#8322O</option><option name="NH3">NH&#8323</option><option name="Cl2">Cl&#8322</option><option name="Br2">Br&#8322</option><option name="SO2">SO&#8322</option></select></td></tr>
+				<tr><td align="center"># of Each</td></tr>
+				<tr><td><input id="fuller_C4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_H4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_O4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_N4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_S4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_F4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_Cl4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_Br4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_I4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_ar4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_het4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><hr class="popup"></td></tr>
+				<tr><td><input id="fuller_molformula4" type="any" readonly class="nar"></td></tr>
+				<tr><td><input id="fuller_molweight4" type="number" readonly step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_dvol4" type="number" readonly step="any" class="nar"></td></tr>
+			</table>
+		</td>
+
+		<td>
+			<table class="cat-form-narrow">
+				<tr><td align="center"><select id="dr_molname_dvol5"><option selected name="Custom">Custom</option><option name="N2">N&#8322</option><option name="O2">O&#8322</option><option name="Air">Air</option><option name="H2O">H&#8322O</option><option name="CO">CO</option><option name="CO2">CO&#8322</option><option name="H2">H&#8322</option><option name="He">He</option><option name="Ar">Ar</option><option name="N2O">N&#8322O</option><option name="NH3">NH&#8323</option><option name="Cl2">Cl&#8322</option><option name="Br2">Br&#8322</option><option name="SO2">SO&#8322</option></select></td></tr>
+				<tr><td align="center"># of Each</td></tr>
+				<tr><td><input id="fuller_C5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_H5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_O5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_N5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_S5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_F5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_Cl5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_Br5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_I5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_ar5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_het5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><hr class="popup"></td></tr>
+				<tr><td><input id="fuller_molformula5" type="any" readonly class="nar"></td></tr>
+				<tr><td><input id="fuller_molweight5" type="number" readonly step="any" class="nar"></td></tr>
+				<tr><td><input id="fuller_dvol5" type="number" readonly step="any" class="nar"></td></tr>
+			</table>
+		</td>
+		
+		<td>
+			<table class="cat-form-narrow">
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td>/ g × mol<sup>-1</sup></td></tr>
+				<tr><td>/ cm<sup>3</sup> × mol<sup>-1</sup></td></tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</div>
+
+<div id="dialog_lebas_vb" title="Estimate Molar Volumes of Pure Components">
+<table class="cat-form-narrow">
+	<tr id="tr_reactants_products_diluent_header_lebas" style='font-size:16px;text-decoration:underline;'>
+		<td></td>
+		<td>Reactant A</td>
+		<td>Product B</td>
+		<td>Diluent C</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>
+			<table class="cat-form-narrow">
+				<tr><td>Atom / Structure</td></tr>
+				<tr><td>C</td></tr>
+				<tr><td>H</td></tr>
+				<tr><td>O</td></tr>
+				<tr><td align="left">&rarr;&nbsp;In methyl esters and ethers&nbsp;</td></tr>
+				<tr><td align="left">&rarr;&nbsp;In ethyl esters and ethers&nbsp;</td></tr>
+				<tr><td align="left">&rarr;&nbsp;In higher esters and ethers&nbsp;</td></tr>
+				<tr><td align="left">&rarr;&nbsp;In acids&nbsp;</td></tr>
+				<tr><td align="left">&rarr;&nbsp;Joined to S, P, and N&nbsp;</td></tr>
+				<tr><td>N, doubly bonded</td></tr>
+				<tr><td align="left">&rarr;&nbsp;In primary amines&nbsp;</td></tr>
+				<tr><td align="left">&rarr;&nbsp;In secondary amines&nbsp;</td></tr>
+				<tr><td>Br</td></tr>
+				<tr><td>Cl</td></tr>
+				<tr><td>F</td></tr>
+				<tr><td>I</td></tr>
+				<tr><td>S</td></tr>
+				<tr><td>Ring, three-membered</td></tr>
+				<tr><td>&rarr;&nbsp;Four-membered</td></tr>
+				<tr><td>&rarr;&nbsp;Five-membered</td></tr>
+				<tr><td>&rarr;&nbsp;Six-membered</td></tr>
+				<tr><td>&rarr;&nbsp;Naphthalene</td></tr>
+				<tr><td>&rarr;&nbsp;Anthracene</td></tr>
+				<tr><td><hr class="popup"></td></tr>
+				<tr><td>Mol. Formula:</td></tr>
+				<tr><td>Mol. Weight:</td></tr>
+				<tr><td>Mol. Volume:</td></tr>
+			</table>
+		</td>
+
+
+
+		<td>
+			<table class="cat-form-narrow">
+				<tr><td># of Each</td></tr>
+				<tr><td><input id="lebas_C1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_H1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_O1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_MeEs_O1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_EtEs_O1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_HiEs_O1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_Ac_O1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_tospn_O1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_dbl_N1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_pri_N1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_sec_N1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_Br1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_Cl1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_F1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_I1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_S1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringThr1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringFo1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringFi1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringSi1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_nphth1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_anthr1" type="number" step="any" class="nar"></td></tr>
+				<tr><td><hr class="popup"></td></tr>
+				<tr><td><input id="lebas_molformula1" type="any" readonly class="nar"></td></tr>
+				<tr><td><input id="lebas_molweight1" type="number" readonly step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_vb1" type="number" readonly step="any" class="nar"></td></tr>
+			</table>
+		</td>
+
+		<td id="hide_column_vb2" style="display: none;">
+			<table class="cat-form-narrow">
+				<tr><td># of Each</td></tr>
+				<tr><td><input id="lebas_C2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_H2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_O2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_MeEs_O2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_EtEs_O2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_HiEs_O2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_Ac_O2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_tospn_O2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_dbl_N2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_pri_N2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_sec_N2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_Br2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_Cl2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_F2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_I2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_S2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringThr2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringFo2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringFi2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringSi2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_nphth2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_anthr2" type="number" step="any" class="nar"></td></tr>
+				<tr><td><hr class="popup"></td></tr>
+				<tr><td><input id="lebas_molformula2" type="any" readonly class="nar"></td></tr>
+				<tr><td><input id="lebas_molweight2" type="number" readonly step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_vb2" type="number" readonly step="any" class="nar"></td></tr>
+			</table>
+		</td>
+
+		<td>
+			<table class="cat-form-narrow">
+				<tr><td># of Each</td></tr>
+				<tr><td><input id="lebas_C3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_H3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_O3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_MeEs_O3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_EtEs_O3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_HiEs_O3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_Ac_O3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_tospn_O3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_dbl_N3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_pri_N3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_sec_N3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_Br3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_Cl3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_F3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_I3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_S3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringThr3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringFo3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringFi3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringSi3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_nphth3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_anthr3" type="number" step="any" class="nar"></td></tr>
+				<tr><td><hr class="popup"></td></tr>
+				<tr><td><input id="lebas_molformula3" type="any" readonly class="nar"></td></tr>
+				<tr><td><input id="lebas_molweight3" type="number" readonly step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_vb3" type="number" readonly step="any" class="nar"></td></tr>
+			</table>
+		</td>
+
+		<td id="hide_column_vb4" style="display: none;">
+			<table class="cat-form-narrow">
+				<tr><td># of Each</td></tr>
+				<tr><td><input id="lebas_C4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_H4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_O4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_MeEs_O4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_EtEs_O4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_HiEs_O4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_Ac_O4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_tospn_O4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_dbl_N4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_pri_N4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_sec_N4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_Br4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_Cl4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_F4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_I4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_S4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringThr4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringFo4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringFi4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringSi4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_nphth4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_anthr4" type="number" step="any" class="nar"></td></tr>
+				<tr><td><hr class="popup"></td></tr>
+				<tr><td><input id="lebas_molformula4" type="any" readonly class="nar"></td></tr>
+				<tr><td><input id="lebas_molweight4" type="number" readonly step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_vb4" type="number" readonly step="any" class="nar"></td></tr>
+			</table>
+		</td>
+
+		<td>
+			<table class="cat-form-narrow">
+				<tr><td># of Each</td></tr>
+				<tr><td><input id="lebas_C5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_H5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_O5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_MeEs_O5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_EtEs_O5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_HiEs_O5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_Ac_O5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_tospn_O5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_dbl_N5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_pri_N5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_sec_N5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_Br5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_Cl5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_F5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_I5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_S5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringThr5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringFo5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringFi5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_ringSi5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_nphth5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_anthr5" type="number" step="any" class="nar"></td></tr>
+				<tr><td><hr class="popup"></td></tr>
+				<tr><td><input id="lebas_molformula5" type="any" readonly class="nar"></td></tr>
+				<tr><td><input id="lebas_molweight5" type="number" readonly step="any" class="nar"></td></tr>
+				<tr><td><input id="lebas_vb5" type="number" readonly step="any" class="nar"></td></tr>
+			</table>
+		</td>
+		<td>
+			<table class="cat-form-narrow">
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td></td></tr>
+				<tr><td>/ g × mol<sup>-1</sup></td></tr>
+				<tr><td>/ cm<sup>3</sup> × mol<sup>-1</sup></td></tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</div>
+
+<div id="dialog_phiAi" title="Recommended Values for Liquid Association Factor">
+	<table class="cat-form">
+		<tr>
+			<td>For &phi;<sub>Ai</sub> Wilke and Chang recommend:&nbsp;&nbsp;</td>
+			<td>2.6 for water</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>1.9 for methanol</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>1.5 for ethanol</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>1.0 for unassociated compounds</td>
+		</tr>
+	</table>
+</div>
+
+<div style="text-align:center; float:none;">
+Gradient&#x2713; (GradientCheck) for Heterogeneous Catalysis v0.95, March 17, 2016
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- End Wrapper -->
+</body>
+</html>

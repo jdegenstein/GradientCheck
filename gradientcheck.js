@@ -2,10 +2,23 @@
 //////////////////////////////////////////////////////////////////////
 /// GradientCheck 
 /// Written by John Degenstein, Purdue University
-/// Version 0.95-fork
+/// Version 0.96
 /// Date: February X, 2016
+/// Mears Axial Dispersion formula corrected
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
+//
+//Copyright © 2016 Purdue University All rights reserved. 
+//
+//Developed by: Purdue Catalysis Center, School of Chemical Engineering, Purdue University 
+//https://engineering.purdue.edu/~catalyst/ 
+//
+//Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal with the Software without restriction, including without limitation the rights to use, copy, modify, //merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: 
+//Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimers.
+//Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimers in the documentation and/or other materials provided with the distribution.
+//Neither the names of ??, nor the names of its contributors may be used to endorse or promote products derived from this Software without specific prior written permission.
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE CONTRIBUTORS OR COPYRIGHT HOLDERS //BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS WITH THE SOFTWARE.
+//
 
 
 
@@ -1570,7 +1583,6 @@ $(document).ready(function(){
     //id string of output field
     var ndim_colburn_out = "#ndim_colburn"; //unitless
     var ndim_massXfer_coeff_out = "#ndim_massXfer_coeff"; //unitless
-    var ndim_sherwood_out = "#ndim_sherwood"; //unitless
 
     //perform calculations
 
@@ -1580,28 +1592,16 @@ $(document).ready(function(){
         catscope.ndim_colburn = ndim_colburn;
         var ndim_massXfer_coeff = math.eval('ndim_colburn*superf_mass_flux/avg_density/ndim_schmidt^(2/3)',catscope);
         catscope.ndim_massXfer_coeff = ndim_massXfer_coeff;
-        var ndim_sherwood = math.eval('2*ndim_massXfer_coeff*cat_effective_radius/diff_mixture',catscope);
-        catscope.ndim_sherwood = ndim_sherwood;
-
+        $('#ndim_colburn').prop("class","");
+        $('#ndim_massXfer_coeff').prop("class","");
         //actually write the data to the appropriate cell
         writeOut(ndim_colburn_out,ndim_colburn);
         writeOut(ndim_massXfer_coeff_out,ndim_massXfer_coeff);
-        writeOut(ndim_sherwood_out,ndim_sherwood);
       } else if (catscope.ndim_reynolds < 1) {
-        //perform calculations
-        var ndim_sherwood = math.eval('2 + 0.552*ndim_reynolds^(0.5)*ndim_schmidt^(1/3)',catscope); //Froessling correlation
-        catscope.ndim_sherwood = ndim_sherwood;
-        
-        var ndim_massXfer_coeff = math.eval('ndim_sherwood*diff_mixture/2/cat_effective_radius',catscope);
-        catscope.ndim_massXfer_coeff = ndim_massXfer_coeff;
-
-        var ndim_colburn = math.eval('ndim_massXfer_coeff*avg_density*ndim_schmidt^(2/3)/superf_mass_flux',catscope);
-        catscope.ndim_colburn = ndim_colburn;
-
-        //actually write the data to the appropriate cell
-        writeOut(ndim_colburn_out,ndim_colburn);
-        writeOut(ndim_massXfer_coeff_out,ndim_massXfer_coeff);
-        writeOut(ndim_sherwood_out,ndim_sherwood);
+        writeOut(ndim_colburn_out,"Reynolds # is too low");
+        writeOut(ndim_massXfer_coeff_out,"Error");
+        $('#ndim_colburn').prop("class","clcd-red");
+        $('#ndim_massXfer_coeff').prop("class","clcd-red");
       }
     } else if (catscope.dr_reaction_phase == "Liquid Phase") {
       if (catscope.ndim_reynolds > 0.01 && catscope.cat_void_frac > 0.25 && catscope.cat_void_frac < 0.95){
@@ -1609,28 +1609,16 @@ $(document).ready(function(){
         catscope.ndim_colburn = ndim_colburn;
         var ndim_massXfer_coeff = math.eval('ndim_colburn*superf_mass_flux/avg_density/ndim_schmidt^(2/3)',catscope);
         catscope.ndim_massXfer_coeff = ndim_massXfer_coeff;
-        var ndim_sherwood = math.eval('2*ndim_massXfer_coeff*cat_effective_radius/diff_mixture',catscope);
-        catscope.ndim_sherwood = ndim_sherwood;
-
+        $('#ndim_colburn').prop("class","");
+        $('#ndim_massXfer_coeff').prop("class","");
         //actually write the data to the appropriate cell
         writeOut(ndim_colburn_out,ndim_colburn);
         writeOut(ndim_massXfer_coeff_out,ndim_massXfer_coeff);
-        writeOut(ndim_sherwood_out,ndim_sherwood);
       } else if (catscope.ndim_reynolds < 0.01) {
-        //perform calculations
-        var ndim_sherwood = math.eval('2 + ndim_reynolds^(0.6)*ndim_schmidt^(0.33)',catscope); //PLACEHOLDER FOR REAL EQUATION
-        catscope.ndim_sherwood = ndim_sherwood;
-        
-        var ndim_massXfer_coeff = math.eval('ndim_sherwood*diff_mixture/2/cat_effective_radius',catscope);
-        catscope.ndim_massXfer_coeff = ndim_massXfer_coeff;
-
-        var ndim_colburn = math.eval('ndim_massXfer_coeff*avg_density*ndim_schmidt^(2/3)/superf_mass_flux',catscope);
-        catscope.ndim_colburn = ndim_colburn;
-
-        //actually write the data to the appropriate cell
-        writeOut(ndim_colburn_out,ndim_colburn);
-        writeOut(ndim_massXfer_coeff_out,ndim_massXfer_coeff);
-        writeOut(ndim_sherwood_out,ndim_sherwood);
+        writeOut(ndim_colburn_out,"Reynolds # is too low");
+        writeOut(ndim_massXfer_coeff_out,"Error");
+        $('#ndim_colburn').prop("class","clcd-red");
+        $('#ndim_massXfer_coeff').prop("class","clcd-red");
       }
     }
 
@@ -1642,20 +1630,17 @@ $(document).ready(function(){
 
   //////////////////////////////////////////////////////////////////////////////  
   // function for Sherwood Number
+  $("#ndim_massXfer_coeff,#cat_effective_radius,#diff_mixture").on('keyup keydown change', function (){
+    //id string of output field
+    var ndim_sherwood_out = "#ndim_sherwood"; //unitless
 
-  //ndim_sherwood
-  // REMOVED and merged with ndim_massXfer_coeff
-//   $("#ndim_massXfer_coeff,#cat_effective_radius,#diff_mixture").on('keyup keydown change', function (){
-//     //id string of output field
-//     var ndim_sherwood_out = "#ndim_sherwood"; //unitless
-
-//     //perform calculations
-//     var ndim_sherwood = math.eval('2*ndim_massXfer_coeff*cat_effective_radius/diff_mixture',catscope);
-//     catscope.ndim_sherwood = ndim_sherwood;
+    //perform calculations
+    var ndim_sherwood = math.eval('2*ndim_massXfer_coeff*cat_effective_radius/diff_mixture',catscope);
+    catscope.ndim_sherwood = ndim_sherwood;
     
-//     //actually write the data to the appropriate cell
-//     writeOut(ndim_sherwood_out,ndim_sherwood);
-//   });
+    //actually write the data to the appropriate cell
+    writeOut(ndim_sherwood_out,ndim_sherwood);
+  });
 
 
   //////////////////////////////////////////////////////////////////////////////  
@@ -2017,7 +2002,7 @@ $(document).ready(function(){
     
     catscope.axial_disp_coeff = axial_disp_coeff;
 
-    var ndim_peclet = math.eval('2*R_p*superf_mass_flux/cat_void_frac/avg_density/axial_disp_coeff',catscope);
+    var ndim_peclet = math.eval('L_bed*superf_mass_flux/cat_void_frac/avg_density/axial_disp_coeff',catscope);
     catscope.ndim_peclet = ndim_peclet;
 
     var ndim_bodenstein = math.eval('2*cat_effective_radius_ergun*superf_mass_flux/avg_density/axial_disp_coeff',catscope); //possibly wrong but not used for anything
